@@ -57,16 +57,15 @@ List<Map<String, dynamic>> removeDuplicateAndSort(List<dynamic> jsonData) {
     }
   }
   for (var i = removeIndex.length - 1; i > 0; --i) {
+    print( 'Duplicate => ${listMap[removeIndex[i]]['replacement']}');
     listMap.removeAt(removeIndex[i]);
   }
-
+  print('\n');
   listMap.forEach((element) {
     print('$element');
   });
   return listMap;
 }
-
-
 
 String replaceText(String content, List<Map<String, dynamic>> replacementList) {
   String modifiedText = '';
