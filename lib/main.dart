@@ -82,7 +82,7 @@ String replaceText(String content, List<Map<String, dynamic>> replacementList) {
     content = modifiedText;
   });
   RegExp exp = RegExp(r'\s{2}"",\s');
-  RegExp delQuotationMarks = RegExp(r',\s{3}""');
+  RegExp delQuotationMarks = RegExp(r',\s{0,6}""');
   content = content.replaceAll(exp, '');
   content = content.replaceAll(delQuotationMarks, '');
   print('content=>\n $content');

@@ -12,9 +12,11 @@ import 'variable/main_var.dart';
 
 void main() {
   String? resultJson;
+  String? dataJson;
 
   setUp(() async {
     resultJson = await File('test/lib/variable/result.json').readAsString();
+    dataJson = await File('test/lib/variable/data.json').readAsString();
   });
 
   group(
@@ -103,20 +105,14 @@ void main() {
     //setup
     // final mockClient = MockClientHttp();
     ClientHttp httpClient = ClientHttp();
-    final replacementUrl = 'https://raw.githubusercontent.com/thewhitesoft/student-2023-assignment/4203ccd30371783a8cdbc801a5f344b8bb10c8df/replacement.json';
 
     // when(mockClient.fetchData(url)).thenAnswer(
     //       (_) async => http.Response(response, 200).body,
     // );
 
     //run
-    final response = await httpClient.fetchData(replacementUrl);
-    final jsonData = json.decode(response);
-    final replacement = removeDuplicateAndSort(jsonData);
-
-    final dataUrl = 'https://raw.githubusercontent.com/thewhitesoft/student-2023-assignment/main/data.json';
-    final content = await httpClient.fetchData(dataUrl);
-    final completed = replaceText(content, replacement);
+    final replacement = removeDuplicateAndSort(replacementList);
+    final completed = replaceText(dataJson ?? '', replacement);
 
     //verify
     expect(jsonDecode(completed), jsonDecode(resultJson ?? '') );
